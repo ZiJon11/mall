@@ -25,5 +25,6 @@
     right: 0;
     background-color: pink;
     padding-top: 5px;
+    z-index: 99;
   }
 </style>

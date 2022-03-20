@@ -11,6 +11,10 @@ import Profile from '../views/profile/Profile'
 // 配置路由
 const routes = [
   {
+    path: '/',
+    redirect: '/home'
+  },
+  {
     name: 'home',
     path: '/home',
     component: Home
@@ -34,6 +38,7 @@ const routes = [
 
 // 创建实例对象
 const router = new VueRouter({
+  mode: 'history',
   routes
 })
 

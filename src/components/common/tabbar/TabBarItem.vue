@@ -19,19 +19,18 @@
     },
     methods: {
       itemClick() {
+        //路由跳转
         this.$router.replace(this.path)
       }
     },
     computed: {
+      //点了哪个tabBarItem, 他的图片和文字就变粉红色
       isActive() {
         return this.$route.path === this.path
       },
       activeStyle() {
         return this.isActive ? {color: '#ff5777'} : {}
       }
-    },
-    mounted() {
-      console.log(this)
     },
   }
 </script>
