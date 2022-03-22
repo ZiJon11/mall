@@ -38,7 +38,7 @@
     font-size: 16px;
     background-color: #fff;
     padding-bottom: 5px;
-    z-index: 9;
+    z-index: 99;
   }
 
   .tab-control-item {

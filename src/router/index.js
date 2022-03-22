@@ -6,7 +6,7 @@ import Home from '../views/home/Home'
 import Category from '../views/category/Category'
 import Car from '../views/car/Car'
 import Profile from '../views/profile/Profile'
-
+import Detail from '../views/detail/Detail'
 
 // 配置路由
 const routes = [
@@ -34,6 +34,16 @@ const routes = [
     path: '/profile',
     component: Profile
   },
+  {
+    name: 'detail',
+    path: '/detail',
+    component: Detail,
+    props($route) {
+      return {
+        iid: $route.query.iid
+      }
+    }
+  }
 ]
 
 // 创建实例对象

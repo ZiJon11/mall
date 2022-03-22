@@ -1,5 +1,5 @@
 <template>
-  <div class="goods-list-item">
+  <div class="goods-list-item" @click="itemClick">
     <img :src="item.show.img">
     <div class="goods-info">
       <p>{{item.title}}</p>
@@ -17,13 +17,27 @@
       return {
         goodsItem: []
       }
-    }
+    },
+    methods: {
+      itemClick() {
+        this.$router.push({
+          name: 'detail',
+          query: {
+            iid: this.item.iid
+          }
+        })
+        
+      }
+    },
   }
 </script>
 
 <style scoped>
   .goods-list-item {
     width: 48%;
+    border-radius: 6px;
+    overflow: hidden;
+    margin-bottom: 5px;
   }
 
   .goods-list-item img {

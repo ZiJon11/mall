@@ -10,7 +10,10 @@
       </Swipper>
       <RecommendView :recommend="recommend"></RecommendView>
       <HomeFeature></HomeFeature>
-      <TabControl :title="['流行','新款','精选']" @itemClick="changeCurrentype"></TabControl>
+      <TabControl :title="['流行','新款','精选']" 
+        @itemClick="changeCurrentype"
+        ref="tabControl"
+        ></TabControl>
       <GoodsList :goodsList="showGoods"></GoodsList>
     </Scroll>
     <BackTop @click.native="backTop" v-show="isBackTopShow"></BackTop>
@@ -58,7 +61,8 @@
           'sell':{page: 0, list: []}
         },
         currentType: 'pop',
-        isBackTopShow: false
+        isBackTopShow: false,
+        offsetTop: 0,
       }
     },
     computed: {
@@ -113,16 +117,16 @@
         this.$refs.scrollComps.scrollTop(0, 0, 500)
       },
 
-      // 5.获取滚动的位置，将backtop进行显示或隐藏
+      // 5.监听滚动的位置
       getScrollPosition(position) {
         // if(-position.y > 1000) {
         //   this.isBackTopShow = true
         // } else {
         //   this.isBackTopShow = false
         // }
-
+        // 5.1将backtop进行显示或隐藏
         this.isBackTopShow = -position.y > 1000 ? true : false
-      }
+      }           
     },
     created() {
       // 1.请求recommend组件的数据
@@ -131,6 +135,10 @@
       this.getHomeGoodsList('pop')
       this.getHomeGoodsList('new')
       this.getHomeGoodsList('sell')
+    },
+    mounted() {
+      // console.log(this.$refs.tabControl.$el.offsetTop)
+      this.offsetTop = this.$refs.tabControl.$el.offsetTop
     },
   }
 </script>
@@ -151,4 +159,5 @@
     /* 使用better-scroll进行滚动, 必须给给滚动的内容设置高度(content) */
     height: calc(100% - 93px);
   }
+
 </style>
