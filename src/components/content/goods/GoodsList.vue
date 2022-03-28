@@ -1,6 +1,11 @@
 <template>
-  <div class="goods-list">
-    <GoodsListItem v-for="item in goodsList" :key="item.acm" :item="item"></GoodsListItem>
+  <div class="goods-list" ref="goodsList">
+    <GoodsListItem 
+      v-for="item in goodsList" 
+      :key="item.acm" 
+      :item="item"
+    
+    />
   </div>
 </template>
 
@@ -21,7 +26,9 @@
     components: {
       GoodsListItem
     },
+    methods: {
 
+    },
   }
 </script>
 
