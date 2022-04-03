@@ -1,5 +1,6 @@
 <template>
   <div class="goods-size">
+    <div class="goods-params">商品参数</div>
     <div class="size-table">
       <table v-for="(item,index) in goodsSize.tables" :key="index"  cellspacing='0'>
         <tr v-for="(trItem,indey) in item" :key="indey">
@@ -30,6 +31,10 @@
 </script>
 
 <style scoped>
+  .goods-params {
+    padding: 10px 0 20px 20px;
+  }
+
   .goods-size {
     background-color: #fff;
   }

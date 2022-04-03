@@ -1,15 +1,29 @@
 <template>
   <div id="car">
-    我是购物车
+    <NavBar class="car-nav-bar">
+      <span slot="center">购物车(0)</span>
+    </NavBar>
+    <CarBottomBar />
   </div>
 </template>
 
 <script>
+  import NavBar from '@/components/common/navbar/NavBar'
+  import CarBottomBar from '@/views/car/children/CarBottomBar'
+
   export default {
-    name: 'Car'
+    name: 'Car',
+    components: {
+      NavBar,
+      CarBottomBar
+    }
   }
 </script>
 
-<style>
-
+<style scoped>
+  .car-nav-bar {
+    background-color: #ff8198;
+    color: #fff;
+    font-size: 16px;
+  }
 </style>

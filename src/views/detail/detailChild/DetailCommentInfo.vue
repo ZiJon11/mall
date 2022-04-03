@@ -19,7 +19,6 @@
       <div class="user-image">
         <img :src="item" 
         v-for="(item,index) in goodsCommentInfo.images" 
-        @load="detailImageLoad" 
         :key="index">
       </div>
     </div>
@@ -29,13 +28,7 @@
 <script>
   export default {
     name: 'DetailCommentInfo',
-    props: ['goodsCommentInfo'],
-    methods: {
-      detailImageLoad() {
-        this.$emit('imageLoad')
-        console.log(1111);
-      }
-   }
+    props: ['goodsCommentInfo']
   }
 </script>
 

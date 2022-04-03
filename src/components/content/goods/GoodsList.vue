@@ -4,7 +4,6 @@
       v-for="item in goodsList" 
       :key="item.acm" 
       :item="item"
-    
     />
   </div>
 </template>
@@ -25,10 +24,7 @@
     },
     components: {
       GoodsListItem
-    },
-    methods: {
-
-    },
+    }
   }
 </script>
 

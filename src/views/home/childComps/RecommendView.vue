@@ -20,6 +20,7 @@
  .recommend-view {
    display: flex;
    margin: 10px 0;
+   background-color: #fff;
  }
 
  .recommend-item {

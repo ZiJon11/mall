@@ -5,14 +5,14 @@
       <DetailSwipper :topImages="topImages"/>
       <DetailInfo :goods="goods"/>
       <DetailShopInfo :shop="shop"/>
-      <DetailImageInfo :imageInfo="imageInfo" @load="imageLoad"/>
+      <DetailImageInfo :imageInfo="imageInfo" @imageLoad="imageLoad"/>
       <DetailGoodsSize :goodsSize="goodsSize" :goodsInfo="goodsInfo"/>
       <DetailCommentInfo 
         :goodsCommentInfo="goodsCommentInfo" 
-        @imageLoad="imageLoad"
       />
       <DetailRecommend :recommendList="recommendList"/>
     </Scroll>
+    <DetailBottomBar/>
   </div>
 </template>
 
@@ -26,6 +26,8 @@
   import DetailGoodsSize from '@/views/detail/detailChild/DetailGoodsSize'
   import DetailCommentInfo from '@/views/detail/detailChild/DetailCommentInfo'
   import DetailRecommend from '@/views/detail/detailChild/DetailRecommend'
+  import DetailBottomBar from '@/views/detail/detailChild/DetailBottomBar'
+
 
   import Scroll from '@/components/common/scroll/Scroll'
 
@@ -44,6 +46,7 @@
       DetailGoodsSize,
       DetailCommentInfo,
       DetailRecommend,
+      DetailBottomBar,
       Scroll
     },
     data() {
@@ -61,7 +64,6 @@
     methods: {
       imageLoad() {
         this.$refs.scrollContent.scroll.refresh()
-        console.log(2222);
       }
     },
     created() {
@@ -90,6 +92,15 @@
       })
     
     },
+    mounted() {
+      this.$bus.$on('DetailImgLoad', () => {
+        console.log(1);
+        this.$refs.scrollContent.scroll.refresh()
+      })
+    },
+    beforeDestroy() {
+      this.$bus.$off('DetailImgLoad')
+    },
   }
 </script>
 
@@ -102,6 +113,11 @@
   }
 
   .content {
-    height: calc(100% - 44px);
+    /* height: calc(100% - 44px); */
+    position: fixed;
+    top: 44px;
+    left: 0;
+    right: 0;
+    bottom: 44px;
   }
 </style>

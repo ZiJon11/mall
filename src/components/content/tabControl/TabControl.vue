@@ -39,6 +39,7 @@
     background-color: #fff;
     padding-bottom: 5px;
     z-index: 99;
+    /* margin-left: 100px; */
   }
 
   .tab-control-item {

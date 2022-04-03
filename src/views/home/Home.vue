@@ -3,20 +3,18 @@
     <NavBar class="home-nav">
       <div slot="center">购物街</div>
     </NavBar>
+    <TabControl :title="['流行','新款','精选']" @itemClick="changeCurrentype" class="tabControl2" :class="{isShow:isTabControlShow}"/>
     <!-- better-scroll滚动区域 -->
     <Scroll class="content" @pullingUp="loadMore" @scroll="getScrollPosition" ref="scrollComps">
       <Swipper class="home-swipper">
-        <img slot="swipper-img" src="@/assets/img/swipper/homeSwipper.png" alt="">
+        <img slot="swipper-img" src="@/assets/img/swipper/homeSwipper.png">
       </Swipper>
-      <RecommendView :recommend="recommend"></RecommendView>
-      <HomeFeature></HomeFeature>
-      <TabControl :title="['流行','新款','精选']" 
-        @itemClick="changeCurrentype"
-        ref="tabControl"
-        ></TabControl>
-      <GoodsList :goodsList="showGoods"></GoodsList>
+      <RecommendView :recommend="recommend" />
+      <HomeFeature @FeatureImaLoad="FeatureImaLoad" />
+      <TabControl :title="['流行','新款','精选']" @itemClick="changeCurrentype" ref="tabControl" />
+      <GoodsList :goodsList="showGoods" />
     </Scroll>
-    <BackTop @click.native="backTop" v-show="isBackTopShow"></BackTop>
+    <BackTop @click.native="backTop" v-show="isBackTopShow" />
   </div>
 </template>
 
@@ -63,6 +61,8 @@
         currentType: 'pop',
         isBackTopShow: false,
         offsetTop: 0,
+        isTabControlShow: false,
+        currIndex: 0
       }
     },
     computed: {
@@ -102,6 +102,8 @@
 
       // 3.改变currentType的值
       changeCurrentype(index) {
+        this.currIndex = index
+
         if(index === 1) {
           this.currentType = 'new'
         } else if(index === 2) {
@@ -109,6 +111,11 @@
         } else {
           this.currentType = 'pop'
         }
+
+        // 让tabControl和tabControl2的currentIndex保持一致
+        // console.log(this.$refs.tabControl);
+        // this.$refs.tabControl.currentIndex = index
+        // this.$refs.tabControl2.currentIndex = index
       },
       
       // 4.回到顶部的方法
@@ -126,7 +133,15 @@
         // }
         // 5.1将backtop进行显示或隐藏
         this.isBackTopShow = -position.y > 1000 ? true : false
-      }           
+
+        this.isTabControlShow = -position.y > 674 ? true : false
+      },
+
+      // 当Feature组件中的图片加载完后，计算tabControl距离顶部的高度
+      FeatureImaLoad() {
+        console.log(this.$refs.tabControl.$el.offsetTop)
+        this.offsetTop = this.$refs.tabControl.$el.offsetTop
+      }
     },
     created() {
       // 1.请求recommend组件的数据
@@ -148,6 +163,7 @@
     position: relative;
     /* vh代表视口高度, 100vh代表100%的视口高度 */
     height: 100vh;
+    background-color: #fff;
   }
 
   .home-nav {
@@ -158,6 +174,17 @@
   .content {
     /* 使用better-scroll进行滚动, 必须给给滚动的内容设置高度(content) */
     height: calc(100% - 93px);
+  }
+
+  .tabControl2 {
+    position: fixed;
+    left: 0;
+    right: 0;
+    z-index: -1;
+  }
+
+  .isShow {
+    z-index: 1;
   }
 
 </style>
